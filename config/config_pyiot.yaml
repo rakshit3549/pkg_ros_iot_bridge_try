@@ -1,0 +1,14 @@
+config_pyiot:
+  mqtt:
+    server_url: "broker.mqttdashboard.com"
+    server_port: 1883
+    # mqtt_unique_id: "try_test"
+    topic_sub: "/eyrc/vb/try_test/orders"
+    # topic_pub: ""
+    qos: 0
+
+    sub_cb_ros_topic: "/ros_iot_bridge/mqtt/sub"
+    
+  google_apps:
+    spread_sheet_id:  "https://script.google.com/macros/s/AKfycbxzDT9V-wHKWMmVTeVw4HEksTDW5CUCDanxoKQbHk0RUHScBaE5kvYq/exec"
+    submission_spread_sheet_id: ""
