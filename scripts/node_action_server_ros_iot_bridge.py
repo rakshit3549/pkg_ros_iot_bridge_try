@@ -8,6 +8,7 @@ import actionlib
 import json
 import threading
 from pyiot import iot
+import time
 from pkg_ros_iot_bridge.msg import msgRosIotAction
 from pkg_ros_iot_bridge.msg import msgMqttSub
 
@@ -76,10 +77,11 @@ class SimpleServer():
         sheet_id = "IncomingOrders"
         # print(data)
         # print(type(data))
+        
+        ###################################################
         self.update_sheets(sheet_id, data)
-        #----------------------------------
-        #add priority, cost, in payload
-        #----------------------------------
+        ###################################################
+
         msg_mqtt_sub = msgMqttSub()
         msg_mqtt_sub.timestamp = rospy.Time.now()
         msg_mqtt_sub.topic = message.topic
@@ -107,21 +109,20 @@ class SimpleServer():
 
         print sheet_id, goal_srt
         
-        # goal_srt = goal_srt.replace("'",'"')
+        goal_srt = goal_srt.replace("'",'"')
         # print(goal_srt)
 
-        # print(type(goal_srt))
-        # # payload = str(message.payload.decode("utf-8"))
-
-        # goals = json.loads(goal_srt)
+        goals = json.loads(goal_srt)
         # print(type(goals))
         # print(goals)
 
         
-        # t = threading.Thread(name="sheets",
-        #                      target=self.update_sheets,
-        #                      args=[sheet_id, goals])
-        # t.start()
+        t = threading.Thread(name="sheets",
+                             target=self.update_sheets,
+                             args=[sheet_id, goals])
+        time.sleep(4)
+        
+        t.start()
 
 
 
@@ -141,7 +142,7 @@ def main():
 if __name__ == '__main__':
 
     try:
-
+        time.sleep(5)
         main()
 
     except rospy.ROSInterruptException:

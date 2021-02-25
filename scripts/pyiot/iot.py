@@ -43,7 +43,7 @@ def mqtt_subscribe_thread_start(arg_callback_func, arg_broker_url, arg_broker_po
 
 def sheetsUpdate(Id, Priority ,Cost ,order_dict):
 
-    parameter = {"Team Id":205, "Unique Id":"Pandemic","id":str(Id),"Priority":str(Priority),"Cost":str(Cost)}
+    parameter = {"Team Id":"VB#0205", "Unique Id":"Pandemic","id":str(Id),"Priority":str(Priority),"Cost":str(Cost)}
 
     for item in order_dict:
         if item == "city":
@@ -103,9 +103,10 @@ def sheetsUpdate(Id, Priority ,Cost ,order_dict):
 def sheetUpdate(parameters):
 
     try:
-        URL = "https://script.google.com/macros/s/AKfycbxzDT9V-wHKWMmVTeVw4HEksTDW5CUCDanxoKQbHk0RUHScBaE5kvYq/exec"
-        response = requests.get(URL, params=parameters)
-        print(response.content)
+        URLs = ["https://script.google.com/macros/s/AKfycbxzDT9V-wHKWMmVTeVw4HEksTDW5CUCDanxoKQbHk0RUHScBaE5kvYq/exec","https://script.google.com/macros/s/AKfycbw5xylppoda-8HPjt2Tzq4ShU_Xef-Ik-hEtBPcPk0gdGw8095j4RZ7/exec"]
+        for URL in URLs:
+            response = requests.get(URL, params=parameters)
+            print(response.content)
         return 0
     except:
         return -1
